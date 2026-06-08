@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="../Balls.Common/Balls.Common.csproj" />
+  <Project Path="../CatchMe2WinFormsApp/CatchMe2WinFormsApp.csproj" />
   <Project Path="BallGamesWinFormsApp.csproj" />
 </Solution>
