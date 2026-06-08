@@ -2,48 +2,63 @@ namespace BallGamesWinFormsApp
 {
     public partial class MainForm : Form
     {
-        List<MoveBall> moveBalls = new List<MoveBall>();
-        int counter;
-        Random random;
-        int counterBall;
-
+        List<MoveBall> moveBalls;
+        PointBall pointBall;
         public MainForm()
         {
             InitializeComponent();
-            random = new Random();
-            counterBall = random.Next(5, 15);
+        }
+
+        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            pointBall = new PointBall(this, e.X, e.Y);
+            pointBall.Show();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (moveBalls == null || moveBalls.Count == 0) return;
-
-            for (int i = 0; i < moveBalls.Count; i++)
+            var countBalls = 0;
+            foreach (var ball in moveBalls)
             {
-                moveBalls[i].Stop();
-                if (!moveBalls[i].IsOut()) counter++;
+                ball.Stop();
+                if (ball.IsOut())
+                {
+                    countBalls++;
+                }
             }
-
-            MessageBox.Show(counter.ToString());
-            counter = 0;
-            this.Invalidate();
+            MessageBox.Show(countBalls.ToString());
+            StopButton.Enabled = false;
+            ClearButton.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            foreach (var ball in moveBalls)
-            {
-                ball.Stop();
-            }
-            moveBalls.Clear();
-            this.Invalidate();
-            for (int i = 0; i < counterBall; i++)
+            StartButton.Enabled = false;
+            StopButton.Enabled = true;
+            moveBalls = new List<MoveBall>();
+            for (int i = 0; i < 10; i++)
             {
                 var moveBall = new MoveBall(this);
                 moveBalls.Add(moveBall);
                 moveBall.Start();
             }
-            counterBall = random.Next(5, 15);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            StopButton.Enabled = false;
+            ClearButton.Enabled = false;
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            foreach (var ball in moveBalls)
+            {
+                ball.Clear();
+            }
+            StartButton.Enabled = true;
+            ClearButton.Enabled = false;
         }
     }
 }

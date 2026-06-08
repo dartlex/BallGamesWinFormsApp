@@ -34,31 +34,22 @@ namespace BallGamesWinFormsApp
 
         public bool IsOut()
         {
-            if (x < 0 ||
-                y < 0 ||
-                (x + size) > form.ClientSize.Width ||
-                (y + size) > form.ClientSize.Height)
-            {
-                return true;
-            }
-
-            return false;
+            return x >= 0 && y >= 0 && x + size <= form.ClientSize.Width && y + size <= form.ClientSize.Height;
         }
-
         private void Go()
         {
             x += vx;
             y += vy;
         }
 
-        private void Clear()
+        public void Clear()
         {
             var graphics = form.CreateGraphics();
-            var brush = Brushes.White;
+            var brush = new SolidBrush(form.BackColor);
             var rectangle = new Rectangle(x, y, size, size);
             graphics.FillEllipse(brush, rectangle);
         }
 
-        
+
     }
 }
