@@ -2,22 +2,11 @@ namespace BallGamesWinFormsApp
 {
     public partial class MainForm : Form
     {
-        RandomSizeAndPointBall randomSizeAndPointBall;
+        List<MoveBall> moveBalls;
         PointBall pointBall;
         public MainForm()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            randomSizeAndPointBall.Move();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            randomSizeAndPointBall = new RandomSizeAndPointBall(this);
-            randomSizeAndPointBall.Show();
         }
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)
@@ -29,7 +18,26 @@ namespace BallGamesWinFormsApp
 
         private void button3_Click(object sender, EventArgs e)
         {
-            pointBall.Move();
+            for (int i = 0; i < 10; i++)
+            {
+                moveBalls[i].Stop();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            moveBalls = new List<MoveBall>();
+            for (int i = 0; i < 10; i++)
+            {
+                var moveBall = new MoveBall(this);
+                moveBalls.Add(moveBall);
+                moveBall.Start();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

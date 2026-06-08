@@ -7,8 +7,8 @@ namespace BallGamesWinFormsApp
     public class Ball
     {
         private MainForm form;
-        private int vx = 10;
-        private int vy = 10;
+        private int vx = 1;
+        private int vy = 1;
         protected int x = 150;
         protected int y = 150;
         protected int size = 70;
@@ -40,7 +40,7 @@ namespace BallGamesWinFormsApp
         private void Clear()
         {
             var graphics = form.CreateGraphics();
-            var brush = new SolidBrush(form.BackColor);
+            var brush = Brushes.White;
             var rectangle = new Rectangle(x, y, size, size);
             graphics.FillEllipse(brush, rectangle);
         }
