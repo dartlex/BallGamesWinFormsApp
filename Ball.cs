@@ -7,8 +7,8 @@ namespace BallGamesWinFormsApp
     public class Ball
     {
         private MainForm form;
-        private int vx = 1;
-        private int vy = 1;
+        protected int vx = 1;
+        protected int vy = 1;
         protected int x = 150;
         protected int y = 150;
         protected int size = 70;
@@ -31,6 +31,20 @@ namespace BallGamesWinFormsApp
             Go();
             Show();
         }
+
+        public bool IsOut()
+        {
+            if (x < 0 ||
+                y < 0 ||
+                (x + size) > form.ClientSize.Width ||
+                (y + size) > form.ClientSize.Height)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void Go()
         {
             x += vx;

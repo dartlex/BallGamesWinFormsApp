@@ -5,13 +5,13 @@ using System.Windows.Forms;
 
 namespace BallGamesWinFormsApp
 {
-    public class MoveBall : RandomPointBall
+    public class MoveBall : RandomMove
     {
         private System.Windows.Forms.Timer timer;
         public MoveBall(MainForm form) : base(form)
         {
             timer = new System.Windows.Forms.Timer();
-            timer.Interval = 20;
+            timer.Interval = 10;
             timer.Tick += Timer_Tick;
         }
 
